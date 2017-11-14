@@ -2,7 +2,9 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
    <xsl:output encoding="UTF-8" indent="yes" method="xml" />
    <xsl:template match="/Claset/Classification">
+   <ehak>
       <xsl:for-each select="Item">
+         <xsl:sort select="Label/LabelText" lang="ET"/>
          <xsl:element name="maakond">
             <xsl:attribute name="kood">
                <xsl:value-of select="@id" />
@@ -11,6 +13,7 @@
                <xsl:value-of select="Label/LabelText" />
             </xsl:attribute>
             <xsl:for-each select="Item/Item">
+              <xsl:sort select="Label/LabelText" lang="ET"/>
                <xsl:element name="vald">
                   <xsl:attribute name="kood">
                      <xsl:value-of select="@id" />
@@ -20,6 +23,7 @@
                   </xsl:attribute>
                   <xsl:if test="not(contains(Item/@id, '.'))">
                      <xsl:for-each select="Item">
+                     <xsl:sort select="Label/LabelText" lang="ET"/>
                         <xsl:element name="asula">
                            <xsl:attribute name="kood">
                               <xsl:value-of select="@id" />
@@ -31,6 +35,7 @@
                      </xsl:for-each>
                   </xsl:if>
                   <xsl:for-each select="Item/Item">
+					  <xsl:sort select="Label/LabelText" lang="ET"/>
                         <xsl:element name="asula">
                            <xsl:attribute name="kood">
                               <xsl:value-of select="@id" />
@@ -44,5 +49,6 @@
             </xsl:for-each>
          </xsl:element>
       </xsl:for-each>
+     </ehak>
    </xsl:template>
 </xsl:stylesheet>
